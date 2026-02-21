@@ -1,0 +1,125 @@
+name: advdiary
+version: 2.0.5+20000005
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.5.0-172.0.dev <4.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.8
+  get: 4.6.6
+  flutter: 
+    sdk: flutter
+  flutter_screenutil: ^5.9.2
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.3.1
+  image_picker: ^1.1.1
+  shimmer: ^3.0.0
+  http: ^1.2.1
+  google_fonts: ^6.2.1
+  intl: ^0.20.2
+  g_recaptcha_v3: ^0.0.5
+  webview_flutter: ^4.9.0
+  flutter_launcher_icons: ^0.13.1
+  file_picker: ^8.0.0+1
+  path: ^1.9.0
+  image_cropper: ^9.1.0
+  flutter_cached_pdfview: ^0.4.2
+  flutter_native_splash: ^2.4.1
+  permission_handler: ^11.4.0
+  dio: ^5.8.0+1
+  path_provider: ^2.1.5
+  flutter_local_notifications: ^18.0.1
+  flutter_easyloading: ^3.0.5
+  timelines_plus: ^1.0.6
+  carousel_slider: ^5.0.0
+  flutter_inappwebview: ^6.1.5
+  shared_preferences: ^2.5.3
+  flutter_html: ^3.0.0
+  video_player: ^2.9.5
+  url_launcher: ^6.3.1
+  marquee: ^2.3.0
+  open_filex: ^4.7.0
+  better_player_plus: ^1.0.8
+  vimeo_player_flutter: ^0.1.0
+  youtube_player_flutter: ^9.1.2
+  syncfusion_flutter_pdfviewer: ^30.2.7
+  table_calendar: ^3.2.0
+  timezone: ^0.10.1
+  notus: ^1.0.0-rc.2
+  sms_autofill: ^2.4.1
+  dropdown_search: ^6.0.2
+  device_info_plus: ^11.5.0
+  package_info_plus: ^9.0.0
+  public_ip_address: ^1.2.1
+
+dev_dependencies: 
+  flutter_lints: ^4.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
+  fonts:
+    - family: Cabin
+      fonts:
+        - asset: assets/fonts/Cabin-Bold.ttf
+        - asset: assets/fonts/Cabin-BoldItalic.ttf
+        - asset: assets/fonts/Cabin-Italic.ttf
+        - asset: assets/fonts/Cabin-Medium.ttf
+        - asset: assets/fonts/Cabin-MediumItalic.ttf
+        - asset: assets/fonts/Cabin-Regular.ttf
+        - asset: assets/fonts/Cabin-SemiBold.ttf
+        - asset: assets/fonts/Cabin-SemiBoldItalic.ttf
+
+
+    - family: ProximaNovaFont
+      fonts:
+        - asset: assets/fonts/proxima_nova_font.otf
+        - asset: assets/fonts/ProximaNova-Black.ttf
+        - asset: assets/fonts/ProximaNova-Bold.ttf
+        - asset: assets/fonts/ProximaNova-Extrabld.ttf
+        - asset: assets/fonts/ProximaNova-Light.ttf
+        - asset: assets/fonts/ProximaNova-Regular.ttf
+        - asset: assets/fonts/ProximaNova-Semibold.ttf
+        - asset: assets/fonts/ProximaNovaT-Thin.ttf
+
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/moc_icons/
+    - assets/logo/
+    - assets/images/
+    - assets/webPages/
+    - packages/timezone/data/latest_all.tzf
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/logo-final.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  adaptive_icon_background: "#000000" # only available for Android 8.0 devices and above
+  #adaptive_icon_background: "assets/logo/bg.png" # only available for Android 8.0 devices and above
+  adaptive_icon_foreground: "assets/logo/logo-final.png" # only available for Android 8.0 devices and above
+  adaptive_icon_monochrome: "" # only available for Android 13 devices and above
+  # remove_alpha_ios: true
+  background_color_ios: "#000000"
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  # image: assets/logo/splash_screen.png
+  image: assets/logo/logo-final.png
+  # branding: assets/logo/launcher_icon.png
+  color_dark: "#FFFFFF"
+  #image_dark: assets/logo/splash_screen.png
+  image_dark: assets/logo/logo-final.png
+  # branding_dark: assets/logo/launcher_icon.png
+
+  android_12:
+    #image: assets/logo/splash_screen.png
+    image: assets/logo/logo-final.png
+    icon_background_color: "#FFFFFF"
+    #image_dark: assets/logo/splash_screen.png
+    image_dark: assets/logo/logo-final.png
+

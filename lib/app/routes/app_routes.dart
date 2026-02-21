@@ -1,0 +1,90 @@
+part of 'app_pages.dart';
+// DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
+
+abstract class Routes {
+  Routes._();
+
+  static const HOME = _Paths.HOME;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
+  static const REGISTRATION = _Paths.REGISTRATION;
+  static const LOGIN = _Paths.LOGIN;
+  static const OTP = _Paths.OTP;
+  static const RESET_PASSWORD = _Paths.RESET_PASSWORD;
+  static const CASE_LIST = _Paths.CASE_LIST;
+  static const ADD_OR_UPDATE_CASE = _Paths.ADD_OR_UPDATE_CASE;
+  static const CASE_DETAILS = _Paths.NEXT_CASE_DETAILS;
+  static const CASE_CATEGORY = _Paths.CASE_CATEGORY;
+  static const CASE_REPORT = _Paths.CASE_REPORT;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const FAQ_AND_SUPPORT = _Paths.FAQ_AND_SUPPORT;
+  static const NEXT_CASE_TIME_LINE = _Paths.NEXT_CASE_TIME_LINE;
+  static const PACKAGES = _Paths.PACKAGES;
+  static const BKASH_PAYMENT = _Paths.BKASH_PAYMENT;
+  static const PAYMENT_REPORT = _Paths.PAYMENT_REPORT;
+  static const SUPPORT_TOKEN = _Paths.SUPPORT_TOKEN;
+  static const SETTINGS = _Paths.SETTINGS;
+  static const COURT_SETTING = _Paths.COURT_SETTING;
+  static const FIXED_FOR_SETTING = _Paths.FIXED_FOR_SETTING;
+  static const TERMS_AND_CONDITIONS = _Paths.TERMS_AND_CONDITIONS;
+  static const RETURN_POLICY = _Paths.RETURN_POLICY;
+  static const VIDEO_LIST = _Paths.VIDEO_LIST;
+  static const VIDEO_PLAYER = _Paths.VIDEO_PLAYER;
+  static const USER_GUIDE = _Paths.USER_GUIDE;
+  static const CASES = _Paths.CASES;
+  static const COMMING_SOON = _Paths.COMMING_SOON;
+  static const PRIVACY_POLICY = _Paths.PRIVACY_POLICY;
+  static const PENDING_NEXT_DATE = _Paths.PENDING_NEXT_DATE;
+  static const TODAY_CASE_LIST = _Paths.TODAY_CASE_LIST;
+  static const COMMENTS = _Paths.COMMENTS;
+  static const CALENDAR = _Paths.CALENDAR;
+  static const NOTES = _Paths.NOTES;
+  static const ADD_OR_UPDATE_NOTE = _Paths.ADD_OR_UPDATE_NOTE;
+  static const BOOKS = _Paths.BOOKS;
+  static const BOOK_DETAILS = _Paths.BOOK_DETAILS;
+  static const SUBSCRIPRTION = _Paths.SUBSCRIPRTION;
+  static const AUTO_COMPLETE_OTP = _Paths.AUTO_COMPLETE_OTP;
+  static const ARCHIVE = _Paths.ARCHIVE;
+}
+
+abstract class _Paths {
+  static const HOME = '/home';
+  static const SPLASH_SCREEN = '/splash-screen';
+  static const REGISTRATION = '/registration';
+  static const LOGIN = '/login';
+  static const OTP = '/otp';
+  static const RESET_PASSWORD = '/reset-password';
+  static const CASE_LIST = '/case-list';
+  static const ADD_OR_UPDATE_CASE = '/add-or-update-case';
+  static const NEXT_CASE_DETAILS = '/next-case-details';
+  static const CASE_CATEGORY = '/case-category';
+  static const CASE_REPORT = '/case-report';
+  static const EDIT_PROFILE = '/edit-profile';
+  static const FAQ_AND_SUPPORT = '/faq-and-support';
+  static const NEXT_CASE_TIME_LINE = '/next-case-time-line';
+  static const PACKAGES = '/packages';
+  static const BKASH_PAYMENT = '/bkash-payment';
+  static const PAYMENT_REPORT = '/payment-report';
+  static const SUPPORT_TOKEN = '/support-token';
+  static const SETTINGS = '/settings';
+  static const COURT_SETTING = '/court-setting';
+  static const FIXED_FOR_SETTING = '/fixed-for-setting';
+  static const TERMS_AND_CONDITIONS = '/terms-and-conditions';
+  static const RETURN_POLICY = '/return-policy';
+  static const VIDEO_LIST = '/video-list';
+  static const VIDEO_PLAYER = '/video-player';
+  static const USER_GUIDE = '/user-guide';
+  static const CASES = '/cases';
+  static const COMMING_SOON = '/comming-soon';
+  static const PRIVACY_POLICY = '/privacy-policy';
+  static const PENDING_NEXT_DATE = '/pending-next-date';
+  static const TODAY_CASE_LIST = '/today-case-list';
+  static const COMMENTS = '/comments';
+  static const CALENDAR = '/calendar';
+  static const NOTES = '/notes';
+  static const ADD_OR_UPDATE_NOTE = '/add-or-update-note';
+  static const BOOKS = '/books';
+  static const BOOK_DETAILS = '/book-details';
+  static const SUBSCRIPRTION = '/subscriprtion';
+  static const AUTO_COMPLETE_OTP = '/auto-complete-otp';
+  static const ARCHIVE = '/archive';
+}
