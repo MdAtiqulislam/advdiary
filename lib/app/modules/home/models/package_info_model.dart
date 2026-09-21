@@ -119,39 +119,51 @@ class MonthlyPackage {
 class NewSubscriber {
   final dynamic newSubscriberAmount;
   final int? newSubscriberStatus;
+  final String? newSubscriptionDate;
 
   NewSubscriber({
     this.newSubscriberAmount,
     this.newSubscriberStatus,
+    this.newSubscriptionDate,
   });
 
   factory NewSubscriber.fromJson(Map<String, dynamic> json) => NewSubscriber(
     newSubscriberAmount: json["new_subscriber_amount"],
     newSubscriberStatus: json["new_subscriber_status"],
+    newSubscriptionDate: json["new_subscription_date"],
   );
 
   Map<String, dynamic> toJson() => {
     "new_subscriber_amount": newSubscriberAmount,
     "new_subscriber_status": newSubscriberStatus,
+    "new_subscription_date": newSubscriptionDate,
   };
 }
 
 class YearlySubscriber {
   final dynamic yearlySubscriberAmount;
   final int? yearlyPaymentStatus;
+  final String? yearlyPaymentDate;
+  final bool? lastFiveDaysWarning;
 
   YearlySubscriber({
     this.yearlySubscriberAmount,
     this.yearlyPaymentStatus,
+    this.yearlyPaymentDate,
+    this.lastFiveDaysWarning
   });
 
   factory YearlySubscriber.fromJson(Map<String, dynamic> json) => YearlySubscriber(
     yearlySubscriberAmount: json["yearly_subscriber_amount"],
     yearlyPaymentStatus: json["yearly_payment_status"],
+    yearlyPaymentDate: json["yearly_payment_date"],
+    lastFiveDaysWarning: json["last_five_days_warning"],
   );
 
   Map<String, dynamic> toJson() => {
     "yearly_subscriber_amount": yearlySubscriberAmount,
     "yearly_payment_status": yearlyPaymentStatus,
+    "yearly_payment_date": yearlyPaymentDate,
+    "last_five_days_warning": lastFiveDaysWarning,
   };
 }

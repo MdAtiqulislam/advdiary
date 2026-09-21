@@ -64,7 +64,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontSize: 11,
                 ),
-                unselectedItemColor: AppColors.bodyText,
+                unselectedItemColor:Colors.black, //AppColors.bodyText,
                 onTap: (index) {
                   controller.changeIndex(index);
                 },

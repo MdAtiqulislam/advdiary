@@ -27,6 +27,8 @@ class PendingNextDateController extends GetxController {
   var fixedForList = <SingleFixedForModel>[].obs;
   var selectedFixedFor = SingleFixedForModel().obs;
 
+  var openPaginationSlider = false.obs;
+
   File? file;
 
   // 🔍 SEARCH

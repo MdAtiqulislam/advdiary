@@ -378,31 +378,40 @@ class PackagesView extends GetView<PackagesController> {
                                           ?.newSubscriberStatus ??
                                       0) ==
                                   0) {
+                                final amount = controller
+                                    .packageInfo
+                                    .value
+                                    .data
+                                    ?.newSubscriber
+                                    ?.newSubscriberAmount ?? 0;
+
                                 showDialog(
                                   context: context,
+                                  barrierDismissible: false,
                                   builder: (context) => CustomDialog(
-                                    icon: const Icon(Icons.info_outline,
-                                        color: AppColors.primaryColor,
-                                        size: 40),
-                                    title: "Not Subscribed Yet",
-                                    subtitle: "You are not subscribed to the Update Plan.",
-                                    description: "Access to this content requires an active Update Plan. Would you like to proceed to the payment page to complete your subscription?",
-                                    confirmButtonText: "Continue",
+                                    icon: const Icon(
+                                      Icons.warning_amber_rounded,
+                                      color: Colors.red,
+                                      size: 48,
+                                    ),
+                                    title: "Subscription Required",
+                                    titleColor: Colors.red,
+                                    subtitle: "Active subscription is mandatory to continue.",
+                                    description:
+                                    "You are not subscribed to the Update Plan.\n\n"
+                                        "To access this feature, you must first activate your subscription "
+                                        "by paying ৳$amount.\n\n"
+                                        "Without subscription, this content will remain locked.",
+                                    confirmButtonText: "Subscribe Now (৳$amount)",
                                     cancelButtonText: "Cancel",
-                                    confirmButtonColor: AppColors.primaryColor,
-                                    cancelButtonColor: AppColors.danger,
+                                    confirmButtonColor: Colors.red,   // 🔥 Confirm button red
+                                    cancelButtonColor: Colors.grey.shade400,
                                     onConfirmButtonPressed: () {
                                       Get.back();
-                                      controller.newSubscribe(
-                                          amount:"${controller
-                                              .packageInfo
-                                              .value
-                                              .data
-                                              ?.newSubscriber
-                                              ?.newSubscriberAmount ??0}");
+                                      controller.newSubscribe(amount: "$amount");
                                     },
                                     onCancelButtonPressed: () {
-                                      Navigator.of(context).pop();
+                                      Get.back();
                                     },
                                   ),
                                 );

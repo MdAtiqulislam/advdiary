@@ -1,5 +1,5 @@
 name: advdiary
-version: 2.0.5+20000005
+version: 2.0.10+20000010
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -52,6 +52,8 @@ dependencies:
   device_info_plus: ^11.5.0
   package_info_plus: ^9.0.0
   public_ip_address: ^1.2.1
+  firebase_messaging: ^16.4.3
+  connectivity_plus: ^7.3.1
 
 dev_dependencies: 
   flutter_lints: ^4.0.0

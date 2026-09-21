@@ -15,8 +15,8 @@ class BkashPaymentView extends GetView<BkashPaymentController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(title: "Make Payment",),
-        bottomNavigationBar: CustomBottomNavigationBar(),
+        appBar: const CustomAppBar(title: "Make Payment",showBottomRow: false,),
+
         body: CustomBody(
           child: Obx(() {
             return InAppWebView(

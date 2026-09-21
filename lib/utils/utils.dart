@@ -114,10 +114,14 @@ Future<XFile?> picImage(ImageSource imageSource) async {
   );
 }*/
 
-String formatDate(String? date) {
+String formatDate(
+    String? date, {
+      String format = "MMM -yy",
+    }) {
   if (date != null && date.isNotEmpty) {
     DateTime dDate = DateFormat('y-M-d').parse(date);
-    return DateFormat("MMM -yy").format(dDate);
+
+    return DateFormat(format).format(dDate);
   } else {
     return "";
   }

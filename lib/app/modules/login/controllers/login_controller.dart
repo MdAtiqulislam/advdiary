@@ -1,4 +1,5 @@
 import 'package:advdiary/app/modules/app_bar/app_bar_controller.dart';
+import 'package:advdiary/app/modules/home/controllers/home_controller.dart';
 import 'package:advdiary/app/modules/otp/controllers/otp_controller.dart';
 import 'package:advdiary/app/routes/app_pages.dart';
 import 'package:advdiary/common_widgets/custom_snackbar.dart';
@@ -49,8 +50,9 @@ class LoginController extends GetxController {
         await LocalServices.storeRememberMe(rememberUser.value);
         await LocalServices.storeToken(loginModel.apiToken ?? "");
         await LocalServices().storeUser(loginModel.data ?? UserDataModel());
-
         Get.put(AppBarController()).getAppBarData();
+        Get.find<HomeController>().getPackageInfo();
+        Get.find<HomeController>().cancelDialogue.value=false;
         Get.offAndToNamed(Routes.HOME);
       }else{
         CustomSnackBar(

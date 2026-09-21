@@ -10,12 +10,15 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../app/modules/home/models/package_info_model.dart';
 import '../utils/utils.dart';
 
 class MyDrawerController extends GetxController {
   var isLoading = false.obs;
   var userData=UserDataModel().obs;
   var districtList=<SingleDistrict>[].obs;
+  var newSubscription=NewSubscriber().obs;
+
 
   @override
   void onInit()async {

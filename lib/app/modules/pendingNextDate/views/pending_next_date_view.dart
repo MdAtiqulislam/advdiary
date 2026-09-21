@@ -10,6 +10,7 @@ import '../../../../common_widgets/custom_bottom_sheet.dart';
 import '../../../../common_widgets/custom_loading_screen.dart';
 import '../../../../common_widgets/custom_search_drop_down_field.dart';
 import '../../../../common_widgets/custom_text_field.dart';
+import '../../../../common_widgets/pagination_side_menu.dart';
 import '../../../../constraints/dimensions.dart';
 import '../../../../models/status_model.dart';
 import '../../../../theme/app_colors.dart';
@@ -49,6 +50,14 @@ class PendingNextDateView extends GetView<PendingNextDateController> {
                     Expanded(child: bodyContent()),
                   ],
                 ),
+                if (controller.pendingList.value.data.isNotEmpty)
+                  PaginationSideMenu(
+                    isExpanded: controller.openPaginationSlider,
+                  //  pagination: controller.pendingList.value.pagination,
+                    pdfDownloadLink: controller.pendingList.value.pendingNextDateCaseListPdfDownloadLink??"",
+                  //  exelDownloadLink: controller.caseListModel.value.exelDownloadLink??"",
+                    totalCase:controller.pendingList.value.data.length,
+                  ),
                 if (controller.isLoading.value) const LoadingScreen(),
               ],
             ),
@@ -62,58 +71,6 @@ class PendingNextDateView extends GetView<PendingNextDateController> {
   bodyContent() {
     return CustomScrollView(
       slivers: [
-        // 🔍 SEARCH BAR
-        /*SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppDimensions.horizontalPadding.w,
-              vertical: 10,
-            ),
-            child: Obx(() {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
-                        blurRadius: 8,
-                        offset: const Offset(0, 3))
-                  ],
-                ),
-                child: TextField(
-                  onChanged: (value) {
-                    controller.searchText.value = value;
-                  },
-                  controller: TextEditingController(
-                    text: controller.searchText.value,
-                  )..selection = TextSelection.fromPosition(
-                    TextPosition(offset: controller.searchText.value.length),
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Search case...",
-                    prefixIcon:
-                    Icon(Icons.search, color: Colors.grey.shade600),
-                    suffixIcon: controller.searchText.value.isNotEmpty
-                        ? InkWell(
-                      onTap: () {
-                        controller.searchText.value = "";
-                        controller.getPendingList(search: "");
-                      },
-                      child: Icon(Icons.close,
-                          color: Colors.grey.shade600),
-                    )
-                        : null,
-                    border: InputBorder.none,
-                    contentPadding:
-                    const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                ),
-              );
-            }),
-          ),
-        ),*/
-
         SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.symmetric(

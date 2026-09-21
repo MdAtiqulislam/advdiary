@@ -1,5 +1,9 @@
 import 'package:advdiary/app/modules/app_bar/app_bar_controller.dart';
+import 'package:advdiary/app/modules/home/controllers/home_controller.dart';
+import 'package:advdiary/controllers/my_drawer_controller.dart';
+import 'package:advdiary/services/device_info_helper.dart';
 import 'package:advdiary/theme/theme.dart';
+import 'package:advdiary/utils/force_update_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -15,6 +19,7 @@ FlutterLocalNotificationsPlugin();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
+  DeviceInfoHelper.initialize();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -27,6 +32,9 @@ void main() {
   );
 
   Get.put(AppBarController()).getAppBarData();
+  Get.put(MyDrawerController(), permanent: true);
+  Get.put(HomeController(), permanent: true);
+  Get.put(ForceUpdateController(), permanent: true);
 
   runApp(
     ScreenUtilInit(

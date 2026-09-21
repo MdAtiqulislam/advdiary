@@ -17,6 +17,8 @@ class RemoteServices {
     token = await LocalServices.getToken() ?? "";
     final deviceInfo = await DeviceInfoHelper.getDeviceInfo();
 
+   print(deviceInfo.toString());
+
     return {
       "Authorization": "Bearer $token",
       "Device-Name": deviceInfo["device_name"] ?? "",
@@ -42,16 +44,19 @@ class RemoteServices {
     if (kDebugMode) {
       print("POST URL: $uri");
       print("POST Body: $body");
-    }
 
+    }
     try {
       final http.Response response = await http.post(
         uri,
         body: body,
         headers: headers,
       );
+
       return handleResponse(response);
     } catch (e) {
+
+      print(e);
       AppStrings.httpErrorMSG.value = AppStrings.generalHttpErrorMSG;
       return null;
     }

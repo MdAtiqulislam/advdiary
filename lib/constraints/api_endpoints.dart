@@ -78,5 +78,7 @@ class APIEndPoints {
   static const getBooks="/ajax/book_list";
   static const changePasswordOtpVerification="/ajax/change_password_otp_varification";
   static const getArchive="/ajax/archived_case_list";
+  static const forceUpdate="/auth/force_update";
+
 
 }

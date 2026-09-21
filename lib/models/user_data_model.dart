@@ -9,6 +9,8 @@ class UserDataModel {
   final String? title;
   final dynamic districtId;
   final String? licenceNo;
+  final String? regDate;
+  final String? newSubscriptionDate;
 
   UserDataModel({
     this.id,
@@ -21,6 +23,8 @@ class UserDataModel {
     this.title,
     this.districtId,
     this.licenceNo,
+    this.regDate,
+    this.newSubscriptionDate,
   });
 
   factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
@@ -34,6 +38,8 @@ class UserDataModel {
     title: json["title"],
     districtId: json["district_id"],
     licenceNo: json["licence_no"],
+    regDate: json["reg_date"],
+    newSubscriptionDate: json["new_subscription_date"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -47,5 +53,7 @@ class UserDataModel {
     "title": title,
     "district_id": districtId,
     "licence_no": licenceNo,
+    "reg_date": regDate,
+    "new_subscription_date": newSubscriptionDate,
   };
 }

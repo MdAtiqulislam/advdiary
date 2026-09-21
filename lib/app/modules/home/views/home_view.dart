@@ -13,6 +13,7 @@ import 'package:advdiary/app/modules/home/views/package_info_card.dart';
 import 'package:advdiary/constraints/dimensions.dart';
 import 'package:advdiary/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../common_widgets/auto_scroll_text_list.dart';
@@ -30,6 +31,36 @@ class HomeView extends GetView<HomeController> {
     return SafeArea(
       child: Obx(() {
         if (controller.isLoading.value) return const HomeShimmerView();
+
+        /// yearly expired check
+        if ((controller.packageInfoModel.value.data?.yearlySubscriber
+                        ?.yearlyPaymentStatus ??
+                    0) ==
+                1 &&
+            !controller.isLoading.value) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (Get.isDialogOpen != true) {
+              showYearlyExpiredDialog(context);
+            }
+          });
+        }
+
+        /// yearly expired check
+        if ((controller.packageInfoModel.value.data?.yearlySubscriber
+                        ?.yearlyPaymentStatus ??
+                    0) ==
+                0 &&
+            (controller.packageInfoModel.value.data?.yearlySubscriber
+                    ?.lastFiveDaysWarning ??
+                false) &&
+            !controller.cancelDialogue.value) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (Get.isDialogOpen != true) {
+              showYearlyExpiredWarningDialog(context);
+            }
+          });
+        }
+
         return Scaffold(
           key: _scaffoldKey,
           appBar: CustomAppBar(
@@ -136,12 +167,14 @@ class HomeView extends GetView<HomeController> {
                   SizedBox(
                     height: AppDimensions.widgetPadding.h,
                   ),
-                  if((controller.packageInfoModel.value.data?.monthlyPackage?.bannerStatus??0)==1)...[
+                  if ((controller.packageInfoModel.value.data?.monthlyPackage
+                              ?.bannerStatus ??
+                          0) ==
+                      1) ...[
                     MonthlyPaymentCard(
                       message:
-                      "Please pay your monthly fee to continue using your current package without interruption.",
+                          "Please pay your monthly fee to continue using your current package without interruption.",
                       onPayNow: () {
-
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -149,7 +182,7 @@ class HomeView extends GetView<HomeController> {
                               title: "Confirm Payment",
                               //  subtitle: "Unlock Lifetime Access! 🚀",
                               description:
-                              "Complete your monthly payment of Tk ${controller.packageInfoModel.value.data?.monthlyPackage?.monthlyPackageAmount ?? ""}",
+                                  "Complete your monthly payment of Tk ${controller.packageInfoModel.value.data?.monthlyPackage?.monthlyPackageAmount ?? ""}",
                               icon: Icon(
                                 Icons.verified,
                                 color: AppColors.success,
@@ -163,19 +196,21 @@ class HomeView extends GetView<HomeController> {
                                 Get.back();
                                 controller.monthlySubscribe(
                                     amount:
-                                    "${controller.packageInfoModel.value.data?.monthlyPackage?.monthlyPackageAmount ?? ""}");
+                                        "${controller.packageInfoModel.value.data?.monthlyPackage?.monthlyPackageAmount ?? ""}");
                               },
                             );
                           },
                         );
-
-
                       },
-                      packageName: controller.packageInfoModel.value.data?.monthlyPackage?.monthlyPackageName??"",
-                      amount: "${controller.packageInfoModel.value.data?.monthlyPackage?.monthlyPackageAmount}",
+                      packageName: controller.packageInfoModel.value.data
+                              ?.monthlyPackage?.monthlyPackageName ??
+                          "",
+                      amount:
+                          "${controller.packageInfoModel.value.data?.monthlyPackage?.monthlyPackageAmount}",
                     ),
-
-                    SizedBox(height: AppDimensions.widgetPadding.h,),
+                    SizedBox(
+                      height: AppDimensions.widgetPadding.h,
+                    ),
                   ],
                   if ((controller.packageInfoModel.value.data?.newSubscriber
                                   ?.newSubscriberStatus ??
@@ -331,6 +366,182 @@ class HomeView extends GetView<HomeController> {
           ),
         );
       }),
+    );
+  }
+
+  void showYearlyExpiredDialog(BuildContext context) {
+    final amount = controller.packageInfoModel.value.data?.yearlySubscriber
+            ?.yearlySubscriberAmount ??
+        "";
+    Get.dialog(
+      PopScope(
+        canPop: false,
+        child: CustomDialog(
+          title: "Subscription Expired",
+          description: "Your annual subscription has expired.\n"
+              "Please renew your subscription to maintain full access to the system.",
+
+          /// 👇 Highlight Section
+          otherInfo: Container(
+            padding: EdgeInsets.symmetric(
+              vertical: 10.h,
+              horizontal: 12.w,
+            ),
+            margin: EdgeInsets.only(top: 8.h),
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor.withOpacity(.08),
+              borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(
+                color: AppColors.primaryColor.withOpacity(.2),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
+                    "Amount Payable",
+                    style: AppTextStyles.header(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Text(
+                  "৳$amount / Year",
+                  style: AppTextStyles.title(
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          icon: Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.orange,
+            size: 40.sp,
+          ),
+
+          confirmButtonText: "Subscribe Now",
+          confirmButtonColor: AppColors.primaryColor,
+
+          cancelButtonText: "Cancel",
+          cancelButtonColor: AppColors.danger,
+
+          /// Subscribe
+          onConfirmButtonPressed: () {
+            Get.back();
+            controller.yearlySubscribe(amount: "$amount");
+          },
+
+          /// Cancel
+          onCancelButtonPressed: () {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              SystemNavigator.pop();
+            });
+          },
+        ),
+      ),
+      barrierDismissible: false,
+    );
+  }
+
+  void showYearlyExpiredWarningDialog(BuildContext context) {
+    final amount = controller.packageInfoModel.value.data?.yearlySubscriber
+            ?.yearlySubscriberAmount ??
+        "";
+    Get.dialog(
+      PopScope(
+        canPop: false,
+        child: CustomDialog(
+          title: "Subscription Expiry Alert",
+          descriptionWidget: RichText(
+            text: TextSpan(
+              style: AppTextStyles.body(),
+              children: [
+                const TextSpan(
+                  text: "Your annual subscription will expire ",
+                ),
+                TextSpan(
+                  text: controller.packageInfoModel.value.data?.yearlySubscriber
+                          ?.yearlyPaymentDate ??
+                      "soon",
+                  style: AppTextStyles.body(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const TextSpan(
+                  text:
+                      ".\nPlease renew your subscription before the due date to avoid any interruption in accessing services.",
+                ),
+              ],
+            ),
+          ),
+
+          /// 👇 Highlight Section
+          otherInfo: Container(
+            padding: EdgeInsets.symmetric(
+              vertical: 10.h,
+              horizontal: 12.w,
+            ),
+            margin: EdgeInsets.only(top: 8.h),
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor.withOpacity(.08),
+              borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(
+                color: AppColors.primaryColor.withOpacity(.2),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
+                    "Amount Payable",
+                    style: AppTextStyles.header(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Text(
+                  "৳$amount / Year",
+                  style: AppTextStyles.title(
+                    color: AppColors.primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          icon: Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.orange,
+            size: 40.sp,
+          ),
+
+          confirmButtonText: "Subscribe Now",
+          confirmButtonColor: AppColors.primaryColor,
+
+          cancelButtonText: "Cancel",
+          cancelButtonColor: AppColors.danger,
+
+          /// Subscribe
+          onConfirmButtonPressed: () {
+            Get.back();
+            controller.yearlySubscribe(amount: "$amount");
+          },
+
+          /// Cancel
+          onCancelButtonPressed: () {
+            controller.cancelDialogue.value=true;
+            Get.back();
+          },
+        ),
+      ),
+      barrierDismissible: false,
     );
   }
 }
